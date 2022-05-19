@@ -1,20 +1,19 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-import { Appbar, Avatar, Card, Title, Paragraph } from 'react-native-paper';
-import { DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
+import { StyleSheet, View } from 'react-native';
+import { Card, Title, Paragraph } from 'react-native-paper';
+
 
 const CardComponent = (props) => {
 
     const { title, date, duration, distance, picture } = props
 
-    return (<Card style={{ height: 220, margin: 20, borderColor: 'black', borderWidth: 2 }}>
+    return (<Card style={styles.card}>
         <View style={{ display: 'flex', flex: 1, flexDirection: 'column', justifyContent: 'space-between' }}>
             <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
                 <Card.Content >
                     <Paragraph>{date}</Paragraph>
                     <Title>{title}</Title>
                 </Card.Content>
-                <Card.Cover source={{ uri: picture }} style={{ width: 150, height: 100, margin: 20, borderWidth: 1, borderColor: 'black',}} />
+                <Card.Cover source={{ uri: picture }} style={styles.picture} />
             </View>
             <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
                 <Card.Content>
@@ -31,19 +30,18 @@ const CardComponent = (props) => {
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center',
+    card : {
+        height: 220,
+        margin: 20,
+        borderColor: 'black',
+        borderWidth: 2
     },
-    bottom: {
-        display: 'flex',
-        justifyContent: 'space-around',
-        height: 80
-    },
-    title: {
-        color: 'white'
+    picture: {
+        width: 150,
+        height: 100,
+        margin: 20,
+        borderWidth: 1,
+        borderColor: 'black',
     },
     subtitle: {
         fontSize: 20,

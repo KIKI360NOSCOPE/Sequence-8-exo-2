@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import { StatusBar } from 'expo-status-bar';
-import { View, ScrollView } from 'react-native';
+import { View, ScrollView, Text } from 'react-native';
 import { Appbar, Avatar, BottomNavigation } from 'react-native-paper';
-import { DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
+import { Provider as PaperProvider } from 'react-native-paper';
 import CardComponent from '../sequence8exo2/src/components/CardComponents';
 
 
@@ -51,7 +51,7 @@ const App = () => {
       <Appbar.Content title="Activity Tracker" />
       <Avatar.Image style={{ marginRight: 10 }} size={36} source={require('../sequence8exo2/assets/avatar.png')} />
     </Appbar.Header>
-
+    <Text style={{ fontSize: 30, marginBottom: 15, marginTop: 15, fontWeight: 'bold', marginLeft: 10 }}>Home</Text>
       <BottomNavigation
         navigationState={{ index, routes }}
         onIndexChange={setIndex}
