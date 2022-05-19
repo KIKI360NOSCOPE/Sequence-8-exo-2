@@ -48,10 +48,10 @@ const App = () => {
   return (
     <PaperProvider style={{ flex: 1 }}>
       <Appbar.Header>
-      <Appbar.Content title="Activity Tracker" />
-      <Avatar.Image style={{ marginRight: 10 }} size={36} source={require('../sequence8exo2/assets/avatar.png')} />
-    </Appbar.Header>
-    <Text style={{ fontSize: 30, marginBottom: 15, marginTop: 15, fontWeight: 'bold', marginLeft: 10 }}>Home</Text>
+        <Appbar.Content title="Activity Tracker" />
+        <Avatar.Image style={{ marginRight: 10 }} size={36} source={require('../sequence8exo2/assets/avatar.png')} />
+      </Appbar.Header>
+      <Text style={{ fontSize: 30, marginBottom: 15, marginTop: 15, fontWeight: 'bold', marginLeft: 10 }}>Home</Text>
       <BottomNavigation
         navigationState={{ index, routes }}
         onIndexChange={setIndex}
