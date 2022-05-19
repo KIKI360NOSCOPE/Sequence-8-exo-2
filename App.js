@@ -1,68 +1,66 @@
-import * as React from 'react';
-import { Appbar, Avatar, Card, Title, Paragraph, List } from 'react-native-paper';
-import { Platform, View, Text } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { useState } from 'react'
+import { StatusBar } from 'expo-status-bar';
+import { View, ScrollView } from 'react-native';
+import { Appbar, Avatar, BottomNavigation } from 'react-native-paper';
+import { DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
+import CardComponent from '../sequence8exo2/src/components/CardComponents';
 
-const MORE_ICON = Platform.OS === 'ios' ? 'dots-horizontal' : 'dots-vertical';
 
-const list = [
-  {
-    date: '26 mai 2021',
-    img: require('../sequence8exo2/assets/damequicours.png'),
-    activity: 'Marche à pied',
-    distance: '6 Km',
-    duration: '0h59m',
-  },
-  {
-    date: '23 mai 2021',
-    img: require('../sequence8exo2/assets/velo.png'),
-    activity: 'Vélo',
-    distance: '10 Km',
-    duration: '1h38m',
-  },
-  {
-    date: '20 mai 2021',
-    img: require('../sequence8exo2/assets/damequicours.png'),
-    activity: 'Marche à pied',
-    distance: '2 Km',
-    duration: '0h26m',
-  },
-]
+const HomeRoute = () => (<ScrollView style={{ flex: 1 }}>
+  {data.map((e, k) => {
 
-const MyComponent = () => (
-  <View style={{ flex: 1 }}>
-    <Appbar.Header>
+    const { title, date, distance, duration, picture } = e
+
+    return (
+      <CardComponent key={k} title={title} date={date} distance={distance} duration={duration} picture={picture} />
+    )
+
+  })}
+
+</ScrollView>)
+
+const HistoRoute = () => <View></View>
+
+const AjoutRoute = () => <View></View>
+
+const ParamsRoute = () => <View></View>
+
+const data = require("../sequence8exo2/assets/data.json")
+
+
+const App = () => {
+
+  const [index, setIndex] = useState(0);
+  const [routes] = useState([
+    { key: 'home', title: 'Home', icon: 'home' },
+    { key: 'histo', title: "Histo'", icon: 'history' },
+    { key: 'ajout', title: "Ajout'", icon: 'plus-box' },
+    { key: 'params', title: "Params'", icon: 'cog-outline' }
+  ]);
+
+  const renderScene = BottomNavigation.SceneMap({
+    home: HomeRoute,
+    histo: HistoRoute,
+    ajout: AjoutRoute,
+    params: ParamsRoute
+  });
+
+  return (
+    <PaperProvider style={{ flex: 1 }}>
+      <Appbar.Header>
       <Appbar.Content title="Activity Tracker" />
       <Avatar.Image style={{ marginRight: 10 }} size={36} source={require('../sequence8exo2/assets/avatar.png')} />
     </Appbar.Header>
-    <Text style={{ fontSize: 30, marginBottom: 15, marginTop: 15, fontWeight: 'bold', marginLeft: 10 }}>Home</Text>
-      <Card style={{ borderColor: 'black', borderWidth: 3, marginLeft: 10, marginRight: 10 }}>
-        <Card.Content>
-          <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: 10 }}>
-            <View>
-              <Paragraph>26 mai 2021</Paragraph>
-              <Title>Marche à pied</Title>
-            </View>
-            <View style={{ flex: 2, flexDirection: 'row-reverse' }}>
-              <Card.Cover style={{ height: 100, width: 150, borderColor: 'black', borderWidth: 3 }} source={require('../sequence8exo2/assets/damequicours.png')} />
-            </View>
-          </View>
-          <View style={{ flex: 1, flexDirection: 'row' }}>
-            <View style={{ flex: 1 }}>
-              <Title>Distance</Title>
-              <Paragraph style={{ fontSize: 20 }}>6 Km</Paragraph>
-            </View>
-            <View style={{ flex: 1, flexDirection: 'row-reverse' }}>
-              <View>
-                <Title>Durée</Title>
-                <Paragraph style={{ fontSize: 20 }}>0h59m</Paragraph>
-              </View>
-            </View>
-          </View>
-        </Card.Content>
-      </Card>
-  </View>
-);
 
-export default MyComponent;
+      <BottomNavigation
+        navigationState={{ index, routes }}
+        onIndexChange={setIndex}
+        renderScene={renderScene}
+      />
+      <StatusBar />
+    </PaperProvider>
+  );
+}
+
+
+export default App
